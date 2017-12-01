@@ -1,7 +1,14 @@
 import React from 'react';
-
-const TodoItem = ({description, completed, onToggle})=> (
-  <label>Hello</label>
-)
-
-export default TodoItem
+function TodoItem({ id,description, completed, onToggle }) {
+  return (
+    <label>
+      <input type="checkbox"
+      checked={completed}
+      onChange={onToggle}
+      />
+      &nbsp;
+      {description}
+    </label>
+  );
+}
+export default TodoItem;
