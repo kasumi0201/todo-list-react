@@ -5,24 +5,32 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       items: [
-        { id: 662,description: 'First', completed: true },
-        { id: 663,description: 'Second', completed: false },
-        { id: 664,description: 'Third', completed: true },
-        { id: 665,description: 'Fourth', completed: false },
-        { id: 666,description: 'Fifth', completed: true }
+        { description: 'First', completed: true },
+        {description: 'Second', completed: false },
+        { description: 'Third', completed: true },
+        { description: 'Fourth', completed: false },
+        { description: 'Fifth', completed: true }
       ]
     };
   }
 
-  handleToggle = (event) => {
-    console.log(event.target);
+  handleToggle = (index) => {
+    console.log(index);
+        this.setState((prevState)=>{
+      let items = prevState.items;
+    let newItem = Object.assign({},items[index],{completed: !items[index].completed})
+      items[index].completed =! items[index].completed;
+      return {items: items}
+
+    })
   }
 
-    render() {
+  render() {
     const items = this.state.items;
     return (
       <div>
-        {items.map((item, index) => <TodoItem {...item} key={index} onToggle={this.handleToggle}/>
+      {items.map((item, index) =>
+        <TodoItem {...item} key={index} onToggle={()=> this.handleToggle(index)}/>
       )}
       </div>
     )
